@@ -1,9 +1,5 @@
 benchmark:
-  custom: !!python/object/apply:pathlib.WindowsPath
-  - examples
-  - example1.yaml
-  - ..
-  - simple_example.csv
+  custom: ###
   library: null
 problem:
   name: WAOr
@@ -24,12 +20,7 @@ solvers:
   params: {}
   run_params: {}
 results:
-  save_path: !!python/object/apply:pathlib.WindowsPath
-  - examples
-  - example1.yaml
-  - ..
-  - results
-  - example1
+  save_path: ###
   convergence_curve:
   - spins_amplitude
   - fitness_value

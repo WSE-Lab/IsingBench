@@ -102,6 +102,7 @@ def config_from_yaml(yaml_path):
     csv_path = b.get("custom", None)
     if csv_path is not None:
         csv_path = path / '..' / csv_path
+        csv_path = str(csv_path.resolve())
     benchmark = BenchmarkConfig(csv_path, library)
 
     p = raw["problem"]
@@ -112,7 +113,8 @@ def config_from_yaml(yaml_path):
         solvers.append(SolverConfig(s["name"], s.get("params", {}), s.get("run_params", {})))
 
     r = raw["results"]
-    results = ResultsConfig(path / '..' / r["save_path"], r.get("convergence_curve", []), r.get("performance_comparison", False))
+    save_path = path / '..' / r["save_path"]
+    results = ResultsConfig(str(save_path.resolve()), r.get("convergence_curve", []), r.get("performance_comparison", False))
     return ToolConfig(benchmark, problem, solvers, results)
 
 

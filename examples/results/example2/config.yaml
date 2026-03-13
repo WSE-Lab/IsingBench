@@ -27,7 +27,7 @@ solvers:
   run_params:
     num_runs: 10
 results:
-  save_path: !!python/object/apply:pathlib.WindowsPath
+  save_path: ###
   - examples
   - example2.yaml
   - ..

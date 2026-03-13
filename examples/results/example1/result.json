@@ -1,8 +1,8 @@
 {
     "CIM": {
-        "execution_time": 2.9773108959198,
-        "seed": 555174326,
-        "ising_model_calculation_time": 0.0020036697387695312,
+        "execution_time": 0.4743380546569824,
+        "seed": 3456686513,
+        "ising_model_calculation_time": 0.0,
         "best_spins_per_run": [[-1.0, 1.0, 1.0]],
         "best_spins": [-1.0, 1.0, 1.0],
         "lowest_energy_per_run": [-3.243643045425415],
@@ -15,9 +15,9 @@
         "best_selected_test_case": [0]
     },
     "BruteForce": {
-        "execution_time": 0.017005205154418945,
-        "seed": 3187578979,
-        "ising_model_calculation_time": 0.0020036697387695312,
+        "execution_time": 0.0015070438385009766,
+        "seed": 101304472,
+        "ising_model_calculation_time": 0.0,
         "best_spins_per_run": [[-1.0, 1.0, 1.0]],
         "best_spins": [-1.0, 1.0, 1.0],
         "lowest_energy_per_run": [-3.243643045425415],

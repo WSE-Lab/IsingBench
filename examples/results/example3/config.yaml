@@ -22,7 +22,7 @@ solvers:
   params: {}
   run_params: {}
 results:
-  save_path: !!python/object/apply:pathlib.WindowsPath
+  save_path: ###
   - examples
   - example3.yaml
   - ..

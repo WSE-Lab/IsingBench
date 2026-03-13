@@ -133,6 +133,33 @@ ising_bench query benchmark-config --name [NAME]
 
 > For solver-specific parameters, see [docs/solvers.md](docs/solvers.md).
 
+## Result Analysis
+
+IsingBench can generate the following plots and save them to `<save_path>/figs/`.
+
+### Convergence Curves
+
+Convergence curves show how the optimization evolves over iterations. The available keys
+depend on the solver type — not all keys are supported by every solver:
+
+| Key | Description |
+|-----|-------------|
+| `fitness_value` | Fitness value of the solution per iteration |
+| `energy` | Ising energy of the spin configuration per iteration |
+| `spins_amplitude` | Amplitude of spin variables over iterations |
+
+Unsupported keys for a given solver are silently skipped.
+
+<img src="examples/results/example1/figs/CIM_spins_amplitude_trajectory.png">
+
+### Performance Comparison
+
+When `--performance-comparison` is enabled, IsingBench generates a box plot summarizing
+fitness scores across all runs for each solver, together with any loaded baseline results.
+This enables direct visual comparison between solvers and reference methods from the literature.
+
+<img src="examples/results/example2/figs/performance_comparison.png">
+
 ## Extending IsingBench
 
 ### Adding a Custom Problem
