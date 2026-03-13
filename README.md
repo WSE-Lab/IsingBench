@@ -99,6 +99,18 @@ python ising_bench.py \
 >Ready-to-run example configs and their results are available in [examples/](examples/).
 ---
 
+## Benchmarks
+
+| Benchmark | Test Cases | Attributes |
+|-----------|-----------|------------|
+| `paintcontrol` | 90 | `time`, `rate` |
+| `gsdtsr` | 5555 | `time`, `rate` |
+| `iof/rol` | 1941 | `time`, `rate` | 
+
+To inspect available metrics and baseline results for a benchmark:
+```bash
+ising_bench query benchmark-config --name [NAME]
+```
 ## Optimization Strategies
 
 | Strategy | Description |
