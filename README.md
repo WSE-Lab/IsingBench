@@ -18,6 +18,27 @@ $$E(\mathbf{s}) = -\sum_i h_i s_i - \frac{1}{2} \sum_{i,j} J_{ij} s_i s_j$$
 
 where $s_i \in \{-1, +1\}$ are spin variables, $h_i$ are linear coefficients, and $J_{ij}$ are quadratic coefficients.
 
+
+The framework structure of IsingBench is as follow, composed of Benchmarks, IsingTester, and Result Analysis.
+
+<img src="docs/imgs/structure.png" alt="Overview of IsingBench">
+
+### Workflow
+
+The workflow starts with the user configuring a problem, evaluation strategy, solver, and
+analysis settings. The problem can be loaded from the built-in benchmark library or provided
+as a custom dataset.
+
+IsingTester then encodes the problem into candidate solutions — either as Ising spin
+configurations evaluated via an Ising Hamiltonian, or as binary vectors evaluated via
+classical objective functions. A user-selected solver iteratively improves these candidates
+until a final solution is returned.
+
+Results are passed to the Result Analysis module, which computes metrics such as energy
+and fitness values and generates visualizations including convergence curves and performance
+comparison plots. When the same benchmark is used with consistent configurations, results can also be compared directly
+against reference methods from the literature such as QAOA.
+
 ---
 
 ## Installation
