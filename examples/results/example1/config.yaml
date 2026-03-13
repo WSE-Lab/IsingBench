@@ -1,0 +1,36 @@
+benchmark:
+  custom: !!python/object/apply:pathlib.WindowsPath
+  - examples
+  - example1.yaml
+  - ..
+  - simple_example.csv
+  library: null
+problem:
+  name: WAOr
+  params:
+    effectiveness:
+    - failure_rate
+    cost:
+    - execution_time
+    - cost
+    minimization: true
+  ising_params:
+    scaling: true
+solvers:
+- name: CIM
+  params: {}
+  run_params: {}
+- name: BruteForce
+  params: {}
+  run_params: {}
+results:
+  save_path: !!python/object/apply:pathlib.WindowsPath
+  - examples
+  - example1.yaml
+  - ..
+  - results
+  - example1
+  convergence_curve:
+  - spins_amplitude
+  - fitness_value
+  performance_comparison: false

@@ -1,0 +1,32 @@
+benchmark:
+  custom: null
+  library:
+    name: paintcontrol
+    baseline: []
+    config: -1
+problem:
+  name: WAOr_Budget
+  params:
+    budget: 10
+    effectiveness:
+    - rate
+    cost:
+    - time
+  ising_params:
+    scaling: true
+solvers:
+- name: GA
+  params: {}
+  run_params: {}
+- name: SA
+  params: {}
+  run_params: {}
+results:
+  save_path: !!python/object/apply:pathlib.WindowsPath
+  - examples
+  - example3.yaml
+  - ..
+  - results
+  - example3
+  convergence_curve: []
+  performance_comparison: true

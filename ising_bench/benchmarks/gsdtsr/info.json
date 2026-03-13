@@ -1,0 +1,11 @@
+{
+  "file": "gsdtsr.csv",
+  "results": {
+    "WAOd": {
+      "1": ["BootQA", "EIDQ", "SA"]
+    },
+    "WAOr": {
+      "1": ["Div-QAOA", "IGDec-QAOA", "RandomSearch", "GA"]
+    }
+  }
+}

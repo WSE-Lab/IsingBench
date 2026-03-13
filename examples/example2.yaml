@@ -1,0 +1,24 @@
+benchmark:
+  library:
+    name: paintcontrol
+    config: 1
+    baseline:
+      - IGDec-QAOA
+      - Div-QAOA
+      - RandomSearch
+problem:
+  name: WAOr
+solvers:
+- name: CIM
+  run_params:
+    num_runs: 10
+    batch_size: 10
+- name: GA
+  run_params:
+    num_runs: 10
+results:
+  save_path: ./results/example2
+  convergence_curve:
+  - spins_amplitude
+  - fitness_value
+  performance_comparison: true

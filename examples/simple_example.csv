@@ -1,0 +1,4 @@
+test_case,execution_time,failure_rate,cost
+0,1,0.6,10
+1,4,0.9,80
+2,3,0.3,12

@@ -1,0 +1,21 @@
+benchmark:
+  custom: simple_example.csv
+problem:
+  name: WAOr
+  params:
+    effectiveness:
+      - failure_rate
+    cost:
+      - execution_time
+      - cost
+    minimization: true
+  ising_params:
+    scaling: true
+solvers:
+  - name: CIM
+  - name: BruteForce
+results:
+  save_path: .\results\example1
+  convergence_curve:
+    - spins_amplitude
+    - fitness_value

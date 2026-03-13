@@ -1,0 +1,39 @@
+benchmark:
+  custom: null
+  library:
+    name: paintcontrol
+    baseline:
+    - IGDec-QAOA
+    - Div-QAOA
+    - RandomSearch
+    config: 1
+problem:
+  name: WAOr
+  params:
+    effectiveness:
+    - rate
+    cost:
+    - time
+    minimization: true
+  ising_params: {}
+solvers:
+- name: CIM
+  params: {}
+  run_params:
+    num_runs: 10
+    batch_size: 10
+- name: GA
+  params: {}
+  run_params:
+    num_runs: 10
+results:
+  save_path: !!python/object/apply:pathlib.WindowsPath
+  - examples
+  - example2.yaml
+  - ..
+  - results
+  - example2
+  convergence_curve:
+  - spins_amplitude
+  - fitness_value
+  performance_comparison: true

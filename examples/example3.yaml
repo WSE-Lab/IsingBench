@@ -1,0 +1,20 @@
+benchmark:
+  library:
+    name: paintcontrol
+problem:
+  name: WAOr_Budget
+  params:
+    budget: 10
+    effectiveness:
+    - rate
+    cost:
+    - time
+  ising_params:
+    scaling: true
+solvers:
+- name: GA
+- name: SA
+results:
+  save_path: .\results\example3
+  performance_comparison: true
+
