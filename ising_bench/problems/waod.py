@@ -10,7 +10,7 @@ import pandas as pd
 @register_problem("WAOd")
 class WAOd(BaseProblem):
     def __init__(self, csv_path: str, effectiveness: list[str], cost: list[str],
-                 weights: dict[str, int] = None, minimization: bool = True):
+                 weights: dict[str, int] = None, minimization: bool = False):
         super().__init__(csv_path)
         self.minimization = minimization
         # add minimization

@@ -8,7 +8,7 @@ import pandas as pd
 @register_problem("WAOr")
 class WAOr(BaseProblem):
     def __init__(self, csv_path: str, effectiveness: list[str], cost: list[str],
-                 weights: dict[str, int] = None, minimization: bool = True):
+                 weights: dict[str, int] = None, minimization: bool = False):
         super().__init__(csv_path)
         self.csv_path = csv_path
         self.minimization = minimization

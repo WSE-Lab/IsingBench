@@ -1,0 +1,182 @@
+# IsingBench
+
+Ising Bench is an open-source, Python-based command-line tool that provides a unified, end-to-end pipeline for solving test optimization problems through the Ising model computational paradigm.
+
+
+---
+
+## Overview
+
+IsingBench addresses two classic NP-hard software testing challenges:
+
+- **Test Case Selection (TCS)** — identify a subset of test cases that retains strong fault-detection capability while satisfying constraints such as execution time and testing budget.
+- **Test Case Minimization (TCM)** — reduce the overall test suite size while preserving satisfactory fault coverage or other effectiveness properties.
+
+Both problems are reformulated as **Ising spin configurations** and solved by minimizing an Ising Hamiltonian:
+
+$$E(\mathbf{s}) = -\sum_i h_i s_i - \frac{1}{2} \sum_{i,j} J_{ij} s_i s_j$$
+
+where $s_i \in \{-1, +1\}$ are spin variables, $h_i$ are linear coefficients, and $J_{ij}$ are quadratic coefficients.
+
+---
+
+## Installation
+
+```bash
+git clone https://github.com/WSE-Lab/IsingBench.git
+cd IsingBench
+pip install -r requirement.txt
+```
+
+**Requirements:** Python 3.11+, PyTorch (CUDA optional)
+
+```bash
+# PyTorch with CUDA 12.6 (recommended)
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+```
+
+---
+
+## Quick Start
+
+### Query available resources
+
+```bash
+# List all supported problems (encoding strategies)
+ising_bench query problems
+
+# List all supported solvers
+ising_bench query solvers
+
+# List all benchmarks in the library
+ising_bench query benchmarks
+
+# Inspect a specific benchmark
+ising_bench query benchmark-config --name paintcontrol
+```
+
+### Run via YAML configuration
+
+```yaml
+# config.yaml
+problem:
+  name: WAOr
+  params:
+    effectiveness: 
+    - rate
+    cost: 
+    - time
+benchmark:
+  library:
+    name: paintcontrol
+solvers:
+  - name: CIM
+results:
+  save_path: ./results
+```
+```bash
+ising_bench test --yaml config.yaml
+```
+
+### Run via CLI flags
+
+```bash
+python ising_bench.py \
+  --problem WAOr \
+  --library paintcontrol \
+  --problem-param \
+    effectiveness=['rate'] \
+    cost=['time'] \
+    minimization=true \
+  --solver CIM \
+  --solver GA \
+  --save-path ./results \
+  --convergence-curve spins_amplitude fitness_value
+```
+
+> For a complete reference of all configuration options, see [docs/configuration.md](docs/configuration.md).
+
+>Ready-to-run example configs and their results are available in [examples/](examples/).
+---
+
+## Optimization Strategies
+
+| Strategy | Description |
+|----------|-------------|
+| `WAOr` | Weighted Attribute Optimization (Ratio-Based) |
+| `WAOd` | Weighted Attribute Optimization (Deviation-Based) |
+| `WAOr-Budget` | WAOr with a user-defined budget constraint |
+
+> For mathematical formulations and implementation details, see [docs/strategies.md](docs/problems.md)
+---
+
+## Solvers
+
+| Solver | Type | Description |
+|--------|------|-------------|
+| CIM | Ising | Coherent Ising Machine simulation (GAPP model) |
+| BruteForce | Ising | Exhaustive search, use to verify optimality |
+| GA | Classical | Genetic Algorithm |
+| SA | Classical | Simulated Annealing |
+
+> For solver-specific parameters, see [docs/solvers.md](docs/solvers.md).
+
+## Extending IsingBench
+
+### Adding a Custom Problem
+
+Subclass `BaseProblem`, implement the required methods, and register with `@register_problem`:
+
+```python
+from ising_bench import BaseProblem, register_problem
+
+@register_problem("MyProblem")
+class MyProblem(BaseProblem):
+    def __init__(self, csv_path: str, **kwargs):
+        super().__init__(csv_path)
+
+    def _calc_ising(self):
+        # Translate input data into (J, h) numpy arrays
+        ...
+
+    def fitness_function(self, solution):
+        # Evaluate objective value for a decoded solution
+        ...
+
+    def classical_info(self):
+        # Return (num_of_bits, direction, constraint_fn)
+        ...
+
+    def spins2solution(self, spins):
+        # Convert spin configuration to problem-domain solution
+        ...
+
+    def get_selected_test_case(self, solution):
+        ...
+```
+
+### Adding a Custom Solver
+
+Subclass `BaseIsingSolver` (operates on J and h) or `BaseClassicalSolver` (operates in binary solution space), then register with `@register_solver`:
+
+```python
+from ising_bench.solvers import BaseIsingSolver, register_solver, Result
+
+@register_solver("MySolver")
+class MySolver(BaseIsingSolver):
+    def __init__(self, J, h, steps: int = 1000, device="cpu"):
+        super().__init__(J, h, device)
+        self.steps = steps
+
+    def _run(self, num_runs: int) -> Result:
+        # Core solver logic — called inside torch.no_grad()
+        ...
+```
+
+The base class automatically handles seeding, batching, timing, and result merging.
+
+---
+
+## License
+
+See [LICENSE](LICENSE) for details.
