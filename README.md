@@ -5,6 +5,12 @@ Ising Bench is an open-source, Python-based command-line tool that provides a un
 
 ---
 
+## Demonstration
+
+A demonstration of IsingBench is available in two ways:
+- **Local**: See [`demonstration.mp4`](demonstration.mp4) in this repository.
+- **Online**: Access the demo at [https://www.modelcopilot.org/QSE](https://www.modelcopilot.org/QSE).
+
 ## Overview
 
 IsingBench addresses two classic NP-hard software testing challenges:
