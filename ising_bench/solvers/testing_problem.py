@@ -57,8 +57,14 @@ class ConstraintDominanceComparator(Comparator):
         elif violation1 < violation2:
             return -1
         else:
-            if solution1.objectives[0] < solution2.objectives[0]:
+            direction = solution1.problem.obj_directions[0] \
+                if hasattr(solution1, 'problem') else 1
+            o1 = solution1.objectives[0]
+            o2 = solution2.objectives[0]
+            if direction == BinaryProblem.MAXIMIZE:
+                o1, o2 = -o1, -o2
+            if o1 < o2:
                 return -1
-            elif solution1.objectives[0] > solution2.objectives[0]:
+            elif o1 > o2:
                 return 1
             return 0
